@@ -10,6 +10,7 @@
 <style>
 div#update-container{width:400px; margin:0 auto; text-align:center;}
 div#update-container input, div#update-container select {margin-bottom:10px;}
+
 </style>
 <div id="update-container">
 	<form name="memberUpdateFrm" action="${pageContext.request.contextPath}/member/memberUpdate.do" method="post">
