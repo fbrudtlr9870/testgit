@@ -22,7 +22,7 @@ div#update-container input, div#update-container select {margin-bottom:10px;}
 		<input type="text" class="form-control" placeholder="주소" name="address" value="${member.address}" id="address">
 		<select class="form-control" name="gender" required>
 		  <option value="" disabled selected>성별</option>
-		  <option value="M" ${member.gender=='M'?'selected':'' }>남</option>
+		  <option value="M" ${member.gender=='M'?'selected':'' }> 남</option>
 		  <option value="F" ${member.gender=='F'?'selected':'' }>여</option>
 		</select>
 		<div class="form-check-inline form-check">
