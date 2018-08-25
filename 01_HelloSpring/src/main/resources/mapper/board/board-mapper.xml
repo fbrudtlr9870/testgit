@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="board">
+	<select id="boardList" resultMap="boardMap">
+	select A.*,(select count(*) from attachment where boardno=A.boardno and status='Y') as filecount from board A order by A.boardno desc
+	</select>
+	<select id="totalCount" resultType="_int">
+	select count(*) as cnt from board
+	</select>
+	<insert id="insertBoard">
+	insert into board (boardno,boardtitle,boardwriter,boardcontent)
+	values (seq_boardno.nextval,#{boardTitle},#{boardWriter},#{boardContent})
+	<!-- 전달한 board_vo객체의 boardNo프로퍼티에 결과값을 담는다. -->
+		<selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
+			select seq_boardno.currval from dual
+		</selectKey>
+	</insert>
+	<insert id="insertAttachment">
+	insert into attachment(attachmentno,boardno,originalfilename,renamedfilename)
+	values (seq_attachmentno.nextval,#{boardNo},#{originalFileName},#{renamedFileName})
+	</insert>
+	<select id="selectBoardView" resultType="board">
+	select * from board where boardno=#{boardNo}
+	</select>
+	<select id="selectAttachView" resultType="attachment">
+	select * from attachment where boardno=#{boardNo}
+	</select>
+	<resultMap type="board" id="boardMap">
+	</resultMap>
+</mapper>

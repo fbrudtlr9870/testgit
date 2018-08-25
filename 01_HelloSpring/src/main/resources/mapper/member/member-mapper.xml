@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="member">
+	<insert id="memberEnroll">
+		insert into member values (#{userId},#{password},#{userName},#{gender},#{age},#{email},#{phone},#{address},#{hobby,typeHandler=strArrTypeHandler},default)
+	</insert>
+	<select id="selectOne" resultMap="memberMap">
+		select * from member where userid=#{userId}
+	</select>
+	<update id="updateMember">
+		UPDATE MEMBER SET USERNAME=#{userName}, 
+						  GENDER=#{gender}, 
+						  AGE=#{age}, 
+						  EMAIL=#{email}, 
+						  PHONE=#{phone}, 
+						  ADDRESS=#{address}, 
+						  HOBBY=#{hobby, typeHandler=strArrTypeHandler} 
+		WHERE USERID=#{userId} 
+	</update>
+	<select id="checkIdDuplicate" resultType="_int">
+	select count(*) as count from member where userid=#{userId}
+	</select>
+	 <resultMap type="member" id="memberMap">
+	 	<result column="hobby" property="hobby" typeHandler="com.kh.spring.common.typehandler.StringArrayTypeHandler"/>
+	 </resultMap>
+</mapper>
